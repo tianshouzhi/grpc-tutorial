@@ -1,0 +1,21 @@
+//指定使用proto3语法，如果没有指定，编译器会使用proto2。(必须是文件的非空非注释的第一个行)。
+syntax = "proto3";
+//option属性
+option java_multiple_files = true;
+option java_package = "com.tsz.grpc.quickstart.protocol";
+option java_outer_classname = "HelloWorldProto";
+option objc_class_prefix = "HLW";
+
+// 定义一个服务Greeter，改服务中定义一个SayHello方法，方法的请求参数类型是HelloRequest，响应参数类型为HelloReply
+service Greeter {
+    rpc SayHello (HelloRequest) returns (HelloReply) {
+    }
+}
+// 表示请求信息，定义了一个name字段
+message HelloRequest {
+    string name = 1;
+}
+// 表示响应信息，定义了一个message字段
+message HelloReply {
+    string message = 1;
+}
