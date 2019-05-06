@@ -16,12 +16,9 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
- * <pre>
- * 定义一个服务Greeter，改服务中定义一个SayHello方法，方法的请求参数类型是HelloRequest，响应参数类型为HelloReply
- * </pre>
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.16.1)",
+    value = "by gRPC proto compiler (version 1.20.0)",
     comments = "Source: helloworld.proto")
 public final class GreeterGrpc {
 
@@ -62,6 +59,38 @@ public final class GreeterGrpc {
      return getSayHelloMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.tsz.grpc.quickstart.protocol.HelloRequest,
+      com.tsz.grpc.quickstart.protocol.HelloReply> getSayHelloStreamMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "SayHelloStream",
+      requestType = com.tsz.grpc.quickstart.protocol.HelloRequest.class,
+      responseType = com.tsz.grpc.quickstart.protocol.HelloReply.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.tsz.grpc.quickstart.protocol.HelloRequest,
+      com.tsz.grpc.quickstart.protocol.HelloReply> getSayHelloStreamMethod() {
+    io.grpc.MethodDescriptor<com.tsz.grpc.quickstart.protocol.HelloRequest, com.tsz.grpc.quickstart.protocol.HelloReply> getSayHelloStreamMethod;
+    if ((getSayHelloStreamMethod = GreeterGrpc.getSayHelloStreamMethod) == null) {
+      synchronized (GreeterGrpc.class) {
+        if ((getSayHelloStreamMethod = GreeterGrpc.getSayHelloStreamMethod) == null) {
+          GreeterGrpc.getSayHelloStreamMethod = getSayHelloStreamMethod = 
+              io.grpc.MethodDescriptor.<com.tsz.grpc.quickstart.protocol.HelloRequest, com.tsz.grpc.quickstart.protocol.HelloReply>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "Greeter", "SayHelloStream"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tsz.grpc.quickstart.protocol.HelloRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tsz.grpc.quickstart.protocol.HelloReply.getDefaultInstance()))
+                  .setSchemaDescriptor(new GreeterMethodDescriptorSupplier("SayHelloStream"))
+                  .build();
+          }
+        }
+     }
+     return getSayHelloStreamMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -86,9 +115,6 @@ public final class GreeterGrpc {
   }
 
   /**
-   * <pre>
-   * 定义一个服务Greeter，改服务中定义一个SayHello方法，方法的请求参数类型是HelloRequest，响应参数类型为HelloReply
-   * </pre>
    */
   public static abstract class GreeterImplBase implements io.grpc.BindableService {
 
@@ -97,6 +123,13 @@ public final class GreeterGrpc {
     public void sayHello(com.tsz.grpc.quickstart.protocol.HelloRequest request,
         io.grpc.stub.StreamObserver<com.tsz.grpc.quickstart.protocol.HelloReply> responseObserver) {
       asyncUnimplementedUnaryCall(getSayHelloMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void sayHelloStream(com.tsz.grpc.quickstart.protocol.HelloRequest request,
+        io.grpc.stub.StreamObserver<com.tsz.grpc.quickstart.protocol.HelloReply> responseObserver) {
+      asyncUnimplementedUnaryCall(getSayHelloStreamMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -108,14 +141,18 @@ public final class GreeterGrpc {
                 com.tsz.grpc.quickstart.protocol.HelloRequest,
                 com.tsz.grpc.quickstart.protocol.HelloReply>(
                   this, METHODID_SAY_HELLO)))
+          .addMethod(
+            getSayHelloStreamMethod(),
+            asyncServerStreamingCall(
+              new MethodHandlers<
+                com.tsz.grpc.quickstart.protocol.HelloRequest,
+                com.tsz.grpc.quickstart.protocol.HelloReply>(
+                  this, METHODID_SAY_HELLO_STREAM)))
           .build();
     }
   }
 
   /**
-   * <pre>
-   * 定义一个服务Greeter，改服务中定义一个SayHello方法，方法的请求参数类型是HelloRequest，响应参数类型为HelloReply
-   * </pre>
    */
   public static final class GreeterStub extends io.grpc.stub.AbstractStub<GreeterStub> {
     private GreeterStub(io.grpc.Channel channel) {
@@ -140,12 +177,17 @@ public final class GreeterGrpc {
       asyncUnaryCall(
           getChannel().newCall(getSayHelloMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void sayHelloStream(com.tsz.grpc.quickstart.protocol.HelloRequest request,
+        io.grpc.stub.StreamObserver<com.tsz.grpc.quickstart.protocol.HelloReply> responseObserver) {
+      asyncServerStreamingCall(
+          getChannel().newCall(getSayHelloStreamMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
-   * <pre>
-   * 定义一个服务Greeter，改服务中定义一个SayHello方法，方法的请求参数类型是HelloRequest，响应参数类型为HelloReply
-   * </pre>
    */
   public static final class GreeterBlockingStub extends io.grpc.stub.AbstractStub<GreeterBlockingStub> {
     private GreeterBlockingStub(io.grpc.Channel channel) {
@@ -169,12 +211,17 @@ public final class GreeterGrpc {
       return blockingUnaryCall(
           getChannel(), getSayHelloMethod(), getCallOptions(), request);
     }
+
+    /**
+     */
+    public java.util.Iterator<com.tsz.grpc.quickstart.protocol.HelloReply> sayHelloStream(
+        com.tsz.grpc.quickstart.protocol.HelloRequest request) {
+      return blockingServerStreamingCall(
+          getChannel(), getSayHelloStreamMethod(), getCallOptions(), request);
+    }
   }
 
   /**
-   * <pre>
-   * 定义一个服务Greeter，改服务中定义一个SayHello方法，方法的请求参数类型是HelloRequest，响应参数类型为HelloReply
-   * </pre>
    */
   public static final class GreeterFutureStub extends io.grpc.stub.AbstractStub<GreeterFutureStub> {
     private GreeterFutureStub(io.grpc.Channel channel) {
@@ -202,6 +249,7 @@ public final class GreeterGrpc {
   }
 
   private static final int METHODID_SAY_HELLO = 0;
+  private static final int METHODID_SAY_HELLO_STREAM = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -222,6 +270,10 @@ public final class GreeterGrpc {
       switch (methodId) {
         case METHODID_SAY_HELLO:
           serviceImpl.sayHello((com.tsz.grpc.quickstart.protocol.HelloRequest) request,
+              (io.grpc.stub.StreamObserver<com.tsz.grpc.quickstart.protocol.HelloReply>) responseObserver);
+          break;
+        case METHODID_SAY_HELLO_STREAM:
+          serviceImpl.sayHelloStream((com.tsz.grpc.quickstart.protocol.HelloRequest) request,
               (io.grpc.stub.StreamObserver<com.tsz.grpc.quickstart.protocol.HelloReply>) responseObserver);
           break;
         default:
@@ -286,6 +338,7 @@ public final class GreeterGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new GreeterFileDescriptorSupplier())
               .addMethod(getSayHelloMethod())
+              .addMethod(getSayHelloStreamMethod())
               .build();
         }
       }
