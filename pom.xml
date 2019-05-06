@@ -10,7 +10,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>quickstart</module>
-        <module>route</module>
         <module>auth</module>
         <module>error-handle</module>
         <module>connection-management</module>
